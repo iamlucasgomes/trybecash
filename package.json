@@ -20,6 +20,12 @@
   },
   "homepage": "https://github.com/iamlucasgomes/trybecash#readme",
   "devDependencies": {
+    "eslint": "^8.31.0",
+    "eslint-config-trybe-backend": "^2.1.0",
     "nodemon": "2.0.15"
+  },
+  "dependencies": {
+    "express": "4.17.1",
+    "mysql2": "2.3.3"
   }
 }
