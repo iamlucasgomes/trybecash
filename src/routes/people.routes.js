@@ -1,5 +1,8 @@
 const express = require('express');
 const peopleDB = require('../infra/database/peopleDB');
+const transactionsDB = require('../infra/database/transactionDB');
+const logger = require('../middleware/logger.middleware');
+const loggerDB = require('../infra/database/loggerDB');
 
 const router = express.Router();
 
@@ -67,6 +70,17 @@ router.delete('/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.sqlMessage });
   }
+});
+
+router.post('/:peopleId/transactions', logger, async (req, res, _next) => {
+  const transaction = req.body;
+  const { peopleId } = req.params;
+
+  const [people] = await peopleDB.findById(peopleId);
+  if (people.length <= 0) return res.status(404).json('Pessoa não cadastrada');
+  await loggerDB.insert(req.log);
+  await transactionsDB.insert(transaction, peopleId);
+  return res.status(201).json({ message: 'Transação cadastrada com sucesso' });
 });
 
 module.exports = router;
