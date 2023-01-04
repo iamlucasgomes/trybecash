@@ -1,21 +1,21 @@
 const chai = require('chai');
+const { expect, use } = require('chai');
 const chaiHttp = require('chai-http');
 const sinon = require('sinon');
 
 const app = require('../../src/app/app');
 const connection = require('../../src/infra/database/connection');
 
-const { expect, use } = chai;
-
 use(chaiHttp);
 
+const lukePhone = '851 678 4453';
 const peopleList = [
   {
     id: 1,
     firstName: 'Luke',
     lastName: 'Skywalker',
     email: 'luke.skywalker@trybe.com',
-    phone: '851 678 4453',
+    phone: lukePhone,
   },
   {
     id: 2,
@@ -38,7 +38,7 @@ describe('Testando os endpoints de people', function () {
           firstName: 'Luke',
           lastName: 'Skywalker',
           email: 'luke.skywalker@trybe.com',
-          phone: '851 678 4453',
+          phone: lukePhone,
         },
       );
 
@@ -77,7 +77,7 @@ describe('Testando os endpoints de people', function () {
           firstName: 'Lucão',
           lastName: 'Andarilho dos céus',
           email: 'lucao.andarilho@trybe.com',
-          phone: '851 678 4453',
+          phone: '851 678 5543',
         },
       );
 
